@@ -1,0 +1,32 @@
+<!-- หน้า home -->
+
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<h1>Post</h1>
+<ul>
+    <!-- แสดง post  -->
+    {% for post in object_list %}
+    <li> <a href="{% url 'blog-detail' post.pk %}">{{ post.title }}</a> -
+        <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a> -
+        {{ post.author.username }} -
+        {{ post.post_date }}
+
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+        <small>
+            <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+
+            <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+
+            {% endif %}
+        {% endif %}
+        </small><br />
+        {{ post.snippet}}
+    </li>
+    {% endfor%}
+</ul>
+
+{% endblock %}

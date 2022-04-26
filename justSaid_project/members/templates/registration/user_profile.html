@@ -1,0 +1,52 @@
+<!-- หน้า home -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+
+<h1>User Profile</h1>
+<br/>
+{{ page_user }}
+<div class="card mb-3" ">
+    <div class=" row g-0">
+    <div class="col-md-2">
+{% if page_user.profile_pic %}
+        <img src="{{ page_user.profile_pic.url }}" class="img-fluid rounded-start" width="200" height="200">
+{% else %}    
+    <img src="{% static 'justSaid_web/images/kmitl.jpg' %}" class="img-fluid rounded-start" width="200" height="200">
+    {% endif %}
+    </div>
+    <div class="col-md-10">
+        <div class="card-body">
+
+            <h5 class="card-title">{{ page_user.user.username }}</h5>
+            <p class="small text-muted">
+                
+                {% if post.author.profile.website_url %}
+                <a href="{{ page_user.website_url }}"> Website | </a>
+                {% endif %}
+
+                {% if post.author.profile.facebook_url %}
+                <a href="{{ page_user.facebook_url }}"> Facebook | </a>
+                {% endif %}
+
+                {% if post.author.profile.twitter_url %}
+                <a href="{{ page_user.twitter_url }}">Twitter | </a>
+                {% endif %}
+
+                {% if post.author.profile.instragram_url %}
+                <a href="{{ page_user.instragram_url }}">Instragram | </a>
+                {% endif %}
+
+                {% if post.author.profile.pinterest_url %}
+                <a href="{{ page_user.pinterest_url }}">Pinterest </a>
+                {% endif %}
+            </p>
+            <p class="card-text">{{ page_user.bio }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
